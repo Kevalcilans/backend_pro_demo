@@ -15,4 +15,7 @@ route.post('/login', (req, resp, next) =>
 route.get('/user', verifyToken, (req, resp, next) => {
   resp.send('token is working sucessfully');
 });
+route.patch('/verify', (req, resp, next) =>
+  usercontroller.verifyUser(req, resp, next),
+);
 export { route as userRoute };

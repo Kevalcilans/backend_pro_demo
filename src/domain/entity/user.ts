@@ -1,3 +1,4 @@
+import { UserRole } from '@prisma/client';
 export interface User {
   id: string;
   UserId: number;
@@ -6,8 +7,8 @@ export interface User {
   password: string;
   salt: string;
   email: string;
-  phone: number;
-  username: string;
+  Role: UserRole;
+  isVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
@@ -16,4 +17,16 @@ export interface User {
 export interface userLogin {
   email: string;
   password: string;
+  Role: UserRole;
+}
+
+export interface UpdateUser {
+  firstName?: string;
+  lastName?: string;
+  password?: string;
+  salt?: string;
+  email?: string;
+  Role?: UserRole;
+  isVerified?: boolean;
+  updatedAt?: Date;
 }

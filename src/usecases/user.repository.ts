@@ -1,5 +1,5 @@
 import prisma from '../config/db.config';
-import { User } from '../domain/entity/user';
+import { UpdateUser, User } from '../domain/entity/user';
 import { IUserRepository } from '../domain/interfaces/userRepository';
 
 export class UserRepository implements IUserRepository {
@@ -25,7 +25,7 @@ export class UserRepository implements IUserRepository {
       data: user,
     });
   }
-  async update(user: User, Id: string): Promise<User> {
+  async update(user: UpdateUser, Id: string): Promise<User> {
     return await prisma.users.update({
       where: {
         id: Id,

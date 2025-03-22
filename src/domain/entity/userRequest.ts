@@ -6,8 +6,6 @@ interface User extends JwtPayload {
   firstName: string;
   lastName: string;
   email: string;
-  phone: number;
-  username: string;
 }
 
 interface UserRequest extends Request {

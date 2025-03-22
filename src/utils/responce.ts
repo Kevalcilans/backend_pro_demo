@@ -8,7 +8,7 @@ interface ErrorDetail {
 }
 
 interface SuccessResponse {
-  statuscode: number;
+  status: string;
   message: string;
   data: any;
   errors: [];
@@ -27,7 +27,7 @@ const successResponse = (
   data: any = {},
 ): void => {
   const response: SuccessResponse = {
-    statuscode: 201,
+    status: 'success',
     message: message,
     data: data,
     errors: [],

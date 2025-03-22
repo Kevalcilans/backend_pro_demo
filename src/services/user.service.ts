@@ -30,9 +30,19 @@ export default class UserService {
   async Login(userData: userLogin) {
     const userAvailable = await this.userRepo.findByEmail(userData.email);
     if (!userAvailable) {
+      return new CustomError('user is not Exist', statusCode.badRequest);
+    }
+    const isValidRole = userData.Role === userAvailable.Role;
+    if (!isValidRole) {
       return new CustomError(
-        'email address is already exists',
-        statusCode.badRequest,
+        'You are not allowed to login from here',
+        statusCode.unauthorized,
+      );
+    }
+    if (!userAvailable.isVerified) {
+      return new CustomError(
+        'First please verified your account check your mail',
+        statusCode.unauthorized,
       );
     }
     const decryptPassword = encryptPassword.Decrypt(
@@ -61,5 +71,21 @@ export default class UserService {
       ...updateUser,
       Token: createJwt,
     };
+  }
+  async verifyUser(token: string, verified: boolean) {
+    const findUser = await this.userRepo.findById(token);
+    if (!findUser) {
+      return new CustomError('user is not exist', statusCode.badRequest);
+    }
+    const updateUser = await this.userRepo.update(
+      {
+        isVerified: verified,
+      },
+      token,
+    );
+    if (!updateUser) {
+      return new CustomError('user is not updated', statusCode.badRequest);
+    }
+    return 'updated ssucessfully';
   }
 }

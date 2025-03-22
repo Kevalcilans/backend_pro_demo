@@ -32,6 +32,9 @@ const config = {
   rules: {
     eqeqeq: 'off',
     'no-unused-vars': 'error',
+    'no-duplicate-imports': 'error',
+    'import/no-unused-modules': 'error',
+    'no-unused-vars': 'error',
     'prefer-const': ['error', { ignoreReadBeforeAssign: true }],
   },
   ignores: ['node_modules/', 'dist/', 'build/'], // Fix ignore syntax

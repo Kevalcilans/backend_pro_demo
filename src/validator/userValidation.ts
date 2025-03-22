@@ -12,11 +12,7 @@ export const RegisterSchema = yup.object().shape({
     .string()
     .email('Invalid email format')
     .required('Email is required'),
-  phone: yup
-    .number()
-    .integer('Phone number must be an integer')
-    .required('Phone number is required'),
-  username: yup.string().required('Username is required'),
+  Role: yup.string().required('role is required'),
 });
 
 export const LoginSchema = yup.object().shape({
@@ -29,4 +25,8 @@ export const LoginSchema = yup.object().shape({
     .min(8, 'Password must be at least 8 characters')
     .max(32, 'Password cannot be more than 32 characters')
     .required('Password is required'),
+});
+
+export const verifyUserSchema = yup.object().shape({
+  isVerified: yup.boolean(),
 });
