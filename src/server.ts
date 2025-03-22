@@ -11,12 +11,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+const PORT = process.env.PORT || 3001;
+
 app.get('/example', (req: Request, res: Response) => {
   res.send('Hello World');
 });
 app.use('/user', userRoute);
 app.use(errorHandler);
 
-app.listen(process.env.PORT, () => {
-  console.log(`server is up and running ${process.env.PORT} `);
+app.listen(PORT || 8000, () => {
+  console.log(`server is up and running ${PORT} `);
 });
